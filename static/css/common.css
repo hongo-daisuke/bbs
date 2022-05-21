@@ -1,0 +1,13 @@
+.base_menu {
+    margin: 0 0 0 auto;
+}
+
+.top_menu {
+    display: inline-block;
+    width: 180px;
+    vertical-align: top;
+}
+
+.top_board{
+    padding-bottom: 13px;
+}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}板一覧{% endblock %}
+
+{% block contents %}
+    {% if object_list %}
+        {% for board in object_list %}
+            <a href="{% url 'bbs:thread_menu' board.id %}">No.{{ forloop.counter }}:{{ board.name }}</a> <br>
+        {% endfor %}
+    {% else %}
+        まだ記事が投稿されていません。
+    {% endif %}
+{% endblock %}

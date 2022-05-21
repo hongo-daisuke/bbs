@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block contents %}
+    <div id="comment_area">
+        {% include "bbs/comment.html" %}
+    </div>
+    <br>
+    <a href="{% url 'bbs:board_list' %}">板一覧から話題を探す</a>
+    <br><br>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

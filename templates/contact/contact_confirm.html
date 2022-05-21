@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block title %}お問い合わせ内容確認{% endblock %}
+
+{% block contents %}
+
+<div class="container-fluid" style="margin-top: 30px;">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">お問い合わせ内容確認</div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <h6 class="card-title">お問い合わせ種別</h6>
+                        <p class="card-text" style="word-wrap: break-word;">{{ form.cleaned_data.contact_type }}</p>
+                        <h6 class="card-title">お名前</h6>
+                        <p class="card-text" style="word-wrap: break-word;">{{ form.user_name.value }}</p>
+                        <h6 class="card-title">メールアドレス</h6>
+                        <p class="card-text" style="word-wrap: break-word;">{{ form.user_mail.value }}</p>
+                        <h6 class="card-title">メッセージ</h6>
+                        <p class="card-text pb-3" style="word-wrap: break-word;">{{ form.contact.value }}</p>
+                        <form action="{% url 'contact:complete' %}" method="POST">
+                            <div class="row">
+                                <div class="form-group col-md-11">
+                                    <div>
+                                        {% for field in form %}
+                                            {{field.as_hidden}}
+                                        {% endfor %}
+                                        {% csrf_token %}
+                                    </div>
+                                    {% buttons %}
+                                        <button type="submit" class="btn btn-block btn-outline-primary">送信</button>
+                                    {% endbuttons %}
+                                </div>
+                            </div>
+                        </form>
+                        <form action="{% url 'contact:home' %}" method="POST">
+                            <div class="row">
+                                <div class="form-group col-md-11">
+                                    <div>
+                                        {% for field in form %}
+                                            {{field.as_hidden}}
+                                        {% endfor %}
+                                        {% csrf_token %}
+                                    </div>
+                                    {% buttons %}
+                                        <button type="submit" class="btn btn-block btn-outline-primary">戻る</button>
+                                    {% endbuttons %}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

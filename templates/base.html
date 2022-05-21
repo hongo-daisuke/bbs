@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='slim' %}
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+        <link rel="stylesheet" href="{% static 'css/common.css' %}">
+        <style>body {padding-top: 80px;}</style>
+        <title>簡単掲示板</title>
+    </head>
+    <body>
+        <nav class='navbar navbar-expand-sm navbar-dark bg-dark fixed-top'>
+            <a class='navbar-brand' href='{% url "bbs:index" %}'>BBS TOP</a>
+            <div class="base_menu">
+                <form action="{% url 'bbs:thread_search'%}" method="get" >
+                    {% csrf_token %}
+                    <input type="text" placeholder="スレタイ検索" name="keyword">  
+                    <button type="submit" class="btn btn-outline-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+                        </svg>
+                    </button>
+                    &nbsp;
+                </form>
+            </div>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'logout' %}">ログアウト</a>
+            {% else %}
+                <a href="{% url 'login' %}">ログイン</a>&nbsp;
+                <a href="{% url 'accounts:signup' %}">ユーザー登録</a>&nbsp;
+            {% endif %}
+            <a href="{% url 'bbs:board_list' %}">板一覧から話題を探す</a>
+        </nav>
+        <div class='container'>
+            {% block contents %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

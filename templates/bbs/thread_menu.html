@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}スレッド一覧{% endblock %}
+
+{% block contents %}
+    {% if object_list %}
+        {% for thread in object_list %}
+            <a href="{% url 'bbs:detail'  thread.id %}">No.{{ forloop.counter }}:{{ thread.name }}</a> <br>
+        {% endfor %}
+    {% else %}
+        まだ記事が投稿されていません。
+    {% endif %}
+    {% if request.user.is_authenticated %}
+        <div id="thread_create">
+            {% include "bbs/thread_create.html" %}
+        </div>
+    {% endif %}
+{% endblock %}

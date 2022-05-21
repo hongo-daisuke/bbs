@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}ホーム{% endblock %}
+
+{% block contents %}
+    Hello World !!<br>
+    {% if object %}
+        {% for boardname, boardinfo in object.items %}
+            {% for boardid, threadids in boardinfo.items %}
+                <div class='top_menu'>
+                    <div class='top_board'>
+                        <a href="{% url 'bbs:thread_menu' boardid %}">{{ boardname }}</a> <br>
+                    </div>
+                    {% for thread, threadid in threadids.items %}
+                        <a href="{% url 'bbs:detail'  threadid %}">{{ thread }}</a> <br>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% else %}
+        準備中です。しばらくお待ち下さい。
+    {% endif %}
+{% endblock %}

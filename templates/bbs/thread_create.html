@@ -1,0 +1,9 @@
+{% load bootstrap4 %}
+<form class="form1" id="form1" method="post" action="{% url 'bbs:thread_menu' thread_id%}">
+    <input type="hidden" name="thread_id" value="{{ thread_id }}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary btn-block">作成</button>
+    {% endbuttons %}
+</form>

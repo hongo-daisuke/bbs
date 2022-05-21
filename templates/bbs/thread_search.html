@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}スレッド検索{% endblock %}
+
+{% block contents %}
+
+    {% if object_list %}
+        {% for thread in object_list %}
+            <a href="{% url 'bbs:detail'  thread.id %}">No.{{ forloop.counter }}:{{ thread.name }}</a> <br>
+        {% endfor %}
+    {% else %}
+    検索キーワード : {{ keyword }}<br>
+    お探しのキーワードと一致するスレッドは見つかりませんでした。
+    {% endif %}
+    <br>
+    <a href="{% url 'bbs:board_list' %}">板から話題を探す</a>
+{% endblock %}
